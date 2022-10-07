@@ -6,8 +6,9 @@
 ** de figs. pra completar o album.
 ** Problema da mochila.
 **/
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdlib.h>
 int leitura()
 {
     int num;
@@ -56,7 +57,7 @@ int main()
     int n, m;
     n = leitura();
     m = leitura();
-    int vet[n];
+    int* vet = (int*)malloc(n*sizeof(int));
     zerar(n, vet);
     ler_vetor(m, vet);
     printf("%d\n", total(n, vet));

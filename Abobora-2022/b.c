@@ -44,7 +44,7 @@ char aplicar_regra(char **m, int a, int b, int dim_i, int dim_j){
 
 			if (i < 0 || j < 0) //caso exceder a borda para menos continue
 				continue;
-			if (i >= dim_i || j >= dim_j) //caso exceder a borda para menos continue
+			if (i >= dim_i || j >= dim_j) //caso exceder a borda para mais continue
 				continue;
 
 			if (i == a && j == b) // a própria célula não é contabilizada
