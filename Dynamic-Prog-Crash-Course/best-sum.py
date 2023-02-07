@@ -11,28 +11,25 @@
 ## Os elementos podem ser usados repetidas vezes
 ## As entradas são NÃO-NEGATIVAS
 
-def best_sum(targetSum, nums, memo = None): 
+def best_sum(targetsum, numbers, memo):
+    if memo is None: memo = {}
+    if targetsum in memo: return memo[targetsum]
+    if targetsum == 0: return []
+    if targetsum < 0: return None
 
-    if memo is None:
-        memo = {}
-        
-    if targetSum in memo: return memo[targetSum]
-    if targetSum < 0: return None
-    if targetSum == 0: return []
+    shortest_combination = None
 
-    for num in nums:
-        remainder = targetSum - num
-        remainderResult = best_sum(remainder, nums , memo ) #pass memo as well
-        
-        if remainderResult is not None:
-            remainderResult.append(num)
-            memo[targetSum] = remainderResult
-            return memo[targetSum]
-        
-    memo[targetSum] = None
-    return None
+    for num in numbers:
+        remainder = targetsum - num
+        remainder_result = best_sum(remainder, numbers, memo)
+        if remainder_result != None:
+            combination = [*remainder_result, num]
+            if shortest_combination == None or len(combination) < len(shortest_combination):
+                shortest_combination = combination
+    memo[targetsum] = shortest_combination
+    return memo[targetsum]
 
-print(best_sum(3, {1,2})) ## [1,1,1]
-print(best_sum(3, {4,2})) ## None
-print(best_sum(20, {10,5})) ## [10, 10]
-print(best_sum(300, {7,14})) ## None
+print(best_sum(3, [1,2], None)) ## [2,1]
+print(best_sum(3, [4,2, 3, 1], None)) ## [3]
+print(best_sum(21, [10,5, 6], None)) ## [10, 5, 6]
+print(best_sum(300, [7,14], None)) ## None
